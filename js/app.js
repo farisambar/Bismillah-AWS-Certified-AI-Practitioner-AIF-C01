@@ -24,11 +24,11 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   // 2. Setup Theme Management (Light / Dark)
+  const btnThemeToggle = document.getElementById('btn-theme-toggle');
   const savedTheme = localStorage.getItem('aws_aif_theme') || 'dark';
   document.documentElement.setAttribute('data-theme', savedTheme);
   updateThemeIcon(savedTheme);
 
-  const btnThemeToggle = document.getElementById('btn-theme-toggle');
   if (btnThemeToggle) {
     btnThemeToggle.addEventListener('click', () => {
       const current = document.documentElement.getAttribute('data-theme');
@@ -40,8 +40,9 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function updateThemeIcon(theme) {
-    if (!btnThemeToggle) return;
-    btnThemeToggle.innerHTML = theme === 'dark' 
+    const btn = btnThemeToggle || document.getElementById('btn-theme-toggle');
+    if (!btn) return;
+    btn.innerHTML = theme === 'dark' 
       ? '<span>☀</span> <span>Light Mode</span>' 
       : '<span>🌙</span> <span>Dark Mode</span>';
   }
