@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AWS Certified AI Practitioner (AIF-C01) Practice & Mastery Portal</title>
+  <meta name="description" content="Platform interaktif persiapan ujian sertifikasi AWS Certified AI Practitioner (AIF-C01) dengan 85 soal latihan, kunci jawaban, dan pembahasan mendalam bahasa Indonesia.">
+  <meta name="theme-color" content="#232F3E">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/aws-theme.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+
+  <!-- Top Navigation Header -->
+  <header class="aws-header" role="banner">
+    <div class="aws-header-left">
+      <div class="brand-badge">
+        <span class="aws-logo-icon" aria-hidden="true">AWS</span>
+        <span>AIF-C01 <span class="brand-subtitle">| Practice Exam</span></span>
+      </div>
+    </div>
+
+    <div class="aws-header-center">
+      <div class="header-select-group">
+        <label for="select-question-set">Paket Soal:</label>
+        <select id="select-question-set" aria-label="Pilih Paket Soal Latihan">
+          <option value="all" selected>Semua Soal (85 Soal)</option>
+          <option value="set1">Set 1: CloudCertPrep (65 Soal)</option>
+          <option value="set2">Set 2: Full Practice (20 Soal)</option>
+        </select>
+      </div>
+
+      <div class="mode-segmented-control" role="group" aria-label="Mode Latihan">
+        <button type="button" id="mode-study-btn" class="mode-btn active" title="Jawaban dan pembahasan langsung muncul saat opsi diklik">Study Mode</button>
+        <button type="button" id="mode-exam-btn" class="mode-btn" title="Simulasi ujian resmi dengan timer 90 menit dan evaluasi di akhir">Exam Mode</button>
+      </div>
+    </div>
+
+    <div class="aws-header-right">
+      <button type="button" id="btn-theme-toggle" class="btn-header" aria-label="Ganti Tema Tampilan">
+        <span>☀</span> <span>Light Mode</span>
+      </button>
+      <button type="button" id="btn-drawer-toggle" class="btn-primary" aria-label="Buka Daftar Nomor Soal" style="min-height: 36px; padding: 6px 12px; font-size: 0.85rem;">
+        <span>☰</span> <span>Daftar Soal</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Progress Bar & Exam Timer Strip -->
+  <section class="progress-strip" aria-label="Status Progres Latihan">
+    <div class="progress-info">
+      <span id="progress-text">Soal 1 dari 85</span>
+      <div class="progress-bar-track" aria-hidden="true">
+        <div id="progress-bar-fill" class="progress-bar-fill"></div>
+      </div>
+      <div class="score-counter">
+        <span class="score-badge-correct" title="Jawaban Benar">✔ <strong id="score-correct">0</strong></span>
+        <span class="score-badge-wrong" title="Jawaban Salah">✖ <strong id="score-wrong">0</strong></span>
+      </div>
+    </div>
+
+    <!-- Exam Countdown Timer (Visible only in Exam Simulation) -->
+    <div id="exam-timer-block" class="exam-timer-block">
+      <span>⏱ Sisa Waktu:</span>
+      <span id="exam-timer">90:00</span>
+    </div>
+  </section>
+
+  <!-- Main Canvas Wrapper -->
+  <main class="main-wrapper">
+    
+    <!-- Question Viewport Canvas -->
+    <div class="content-canvas">
+      
+      <!-- Primary Question Card -->
+      <article class="question-card" id="question-card">
+        
+        <!-- Meta Row -->
+        <div class="question-meta-row">
+          <div class="question-meta-left">
+            <span id="question-number-badge" class="question-number-badge">Q1 / 85</span>
+            <span id="domain-badge" class="domain-badge">Fundamentals of AI and ML</span>
+            <span id="set-badge" class="set-badge">Set 1</span>
+          </div>
+          <button type="button" id="btn-flag" class="btn-flag" aria-label="Tandai Soal untuk Ditinjau">
+            ☆ Tandai Soal
+          </button>
+        </div>
+
+        <!-- Question Body -->
+        <h1 id="question-prompt" class="question-prompt">
+          Memuat pertanyaan...
+        </h1>
+
+        <!-- Keywords Box (Study Mode) -->
+        <div id="keywords-box" class="keywords-box" style="display: none;">
+          <span class="keywords-label">Keywords:</span>
+          <div id="keywords-container" style="display: flex; flex-wrap: wrap; gap: 6px;"></div>
+        </div>
+
+        <!-- Interactive Options Container -->
+        <div id="options-container" class="options-list" role="radiogroup" aria-label="Pilihan Jawaban">
+          <!-- Dynamic Option Buttons injected by ui-renderer.js -->
+        </div>
+
+        <!-- Instant Feedback Container (Study Mode / Post Exam) -->
+        <section id="feedback-container" class="feedback-container" aria-live="polite">
+          <div id="feedback-banner" class="feedback-status-banner">
+            <!-- Status banner text -->
+          </div>
+
+          <div id="feedback-content" class="explanations-block">
+            <!-- Option explanations -->
+          </div>
+
+          <!-- Memory Rule Callout Box -->
+          <div id="memory-rule-box" class="memory-rule-box" style="display: none;">
+            <div class="memory-rule-icon" aria-hidden="true">💡</div>
+            <div class="memory-rule-content">
+              <h4>Exam Memory Rule / Ringkasan Kunci</h4>
+              <p id="memory-rule-text"></p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Action Navigation Bar -->
+        <nav class="action-nav-bar" aria-label="Navigasi Pertanyaan">
+          <div class="action-nav-left">
+            <button type="button" id="btn-prev" class="btn-secondary" aria-label="Soal Sebelumnya">
+              <span>←</span> <span>Sebelumnya</span>
+            </button>
+          </div>
+
+          <div class="action-nav-right">
+            <button type="button" id="btn-submit-exam" class="btn-primary" style="display: none; background-color: var(--color-success); border-color: var(--color-success);" aria-label="Submit Ujian">
+              <span>✓ Selesaikan Ujian</span>
+            </button>
+            <button type="button" id="btn-next" class="btn-primary" aria-label="Soal Selanjutnya">
+              <span>Selanjutnya</span> <span>→</span>
+            </button>
+          </div>
+        </nav>
+
+      </article>
+
+      <!-- Keyboard Shortcuts Help -->
+      <footer class="shortcuts-footer" aria-label="Petunjuk Tombol Cepat Keyboard">
+        Navigasi Cepat: <span class="shortcut-kbd">←</span> <span class="shortcut-kbd">→</span> Pindah Soal • <span class="shortcut-kbd">A</span> <span class="shortcut-kbd">B</span> <span class="shortcut-kbd">C</span> <span class="shortcut-kbd">D</span> Pilih Opsi • <span class="shortcut-kbd">F</span> Tandai Soal • <span class="shortcut-kbd">ESC</span> Tutup Menu
+      </footer>
+
+    </div>
+
+    <!-- Question Grid Drawer / Sidebar -->
+    <aside id="nav-drawer" class="nav-drawer" role="complementary" aria-label="Navigasi Kisi Nomor Soal">
+      <div class="nav-drawer-header">
+        <h3>Daftar Soal <span id="drawer-total-count" style="font-weight: normal; font-size: 0.85rem; color: var(--text-muted);">(85 Soal)</span></h3>
+        <button type="button" id="btn-close-drawer" class="btn-secondary" style="min-height: 32px; padding: 4px 8px; font-size: 0.8rem;">
+          ✕ Tutup
+        </button>
+      </div>
+
+      <!-- Filter Chips -->
+      <div class="drawer-filter-group" role="tablist" aria-label="Filter Status Soal">
+        <button type="button" class="filter-chip active" data-filter="all">Semua</button>
+        <button type="button" class="filter-chip" data-filter="unanswered">Belum Dijawab</button>
+        <button type="button" class="filter-chip" data-filter="wrong">Salah</button>
+        <button type="button" class="filter-chip" data-filter="correct">Benar</button>
+        <button type="button" class="filter-chip" data-filter="flagged">Ditandai</button>
+      </div>
+
+      <!-- Scrollable Grid -->
+      <div class="grid-scroll-area">
+        <div id="question-grid" class="question-grid" role="group" aria-label="Kisi Tombol Soal">
+          <!-- Numbers 1..85 injected by ui-renderer.js -->
+        </div>
+      </div>
+    </aside>
+
+    <!-- Mobile Drawer Overlay Backdrop -->
+    <div id="drawer-backdrop" class="drawer-backdrop"></div>
+
+  </main>
+
+  <!-- Modal: Exam Result Summary -->
+  <div id="result-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="modal-title">Hasil Simulasi Ujian AIF-C01</h3>
+      </div>
+
+      <div class="modal-body">
+        <div class="score-circle-wrap">
+          <div id="modal-score-num" class="score-big-number">0%</div>
+          <div id="modal-grade-text" class="score-grade-text">Status Kelulusan</div>
+        </div>
+
+        <div class="result-stats-grid">
+          <div class="result-stat-item">
+            <h5>Total Soal</h5>
+            <p id="modal-total">0</p>
+          </div>
+          <div class="result-stat-item">
+            <h5 style="color: var(--color-success);">Benar</h5>
+            <p id="modal-correct" style="color: var(--color-success);">0</p>
+          </div>
+          <div class="result-stat-item">
+            <h5 style="color: var(--color-danger);">Salah</h5>
+            <p id="modal-wrong" style="color: var(--color-danger);">0</p>
+          </div>
+        </div>
+
+        <div style="text-align: left;">
+          <h4 style="font-size: 0.95rem; font-weight: 700; margin-bottom: 8px; color: var(--text-primary);">Statistik Berdasarkan Domain Ujian</h4>
+          <div id="modal-domain-list"></div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" id="btn-modal-review-wrong" class="btn-primary" style="background-color: var(--color-danger); border-color: var(--color-danger); color: #fff;">
+          Review Soal Salah
+        </button>
+        <button type="button" id="btn-modal-retake" class="btn-secondary">
+          Ulangi Ujian
+        </button>
+        <button type="button" id="btn-modal-close" class="btn-secondary">
+          Tutup
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/data/questions-set1.js"></script>
+  <script src="js/data/questions-set2.js"></script>
+  <script src="js/data/questions-index.js"></script>
+  <script src="js/quiz-engine.js"></script>
+  <script src="js/ui-renderer.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

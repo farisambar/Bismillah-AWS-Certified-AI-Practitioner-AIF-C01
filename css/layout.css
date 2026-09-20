@@ -1,0 +1,427 @@
+/* ==========================================================================
+   AWS Practice Portal Layout
+   Compliant with Antislop Rules (R-03, R-05, R-24)
+   ========================================================================== */
+
+/* Top Navigation Bar */
+.aws-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: var(--header-height);
+  background-color: var(--bg-nav);
+  color: var(--text-nav);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  border-bottom: 2px solid var(--aws-orange);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.aws-header-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.brand-badge {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  font-size: 1.05rem;
+  letter-spacing: -0.2px;
+}
+
+.aws-logo-icon {
+  width: 32px;
+  height: 32px;
+  background-color: var(--aws-orange);
+  color: #16191F;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 0.85rem;
+}
+
+.brand-subtitle {
+  font-weight: 400;
+  color: var(--text-nav-muted);
+  font-size: 0.85rem;
+  margin-left: 4px;
+}
+
+.aws-header-center {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header-select-group {
+  display: flex;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--aws-squid-ink-light);
+  border-radius: var(--radius-sm);
+  padding: 2px 8px;
+}
+
+.header-select-group label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-nav-muted);
+  text-transform: uppercase;
+  margin-right: 6px;
+}
+
+.header-select-group select {
+  background: transparent;
+  color: var(--text-nav);
+  border: none;
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 6px 4px;
+  cursor: pointer;
+}
+
+.header-select-group select option {
+  background-color: var(--bg-surface);
+  color: var(--text-primary);
+}
+
+.aws-header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Mode Toggle Segmented Control */
+.mode-segmented-control {
+  display: flex;
+  background-color: rgba(0, 0, 0, 0.25);
+  border: 1px solid var(--aws-squid-ink-light);
+  border-radius: var(--radius-sm);
+  padding: 3px;
+}
+
+.mode-btn {
+  background: transparent;
+  color: var(--text-nav-muted);
+  border: none;
+  padding: 4px 12px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  min-height: 32px;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.mode-btn.active {
+  background-color: var(--aws-orange);
+  color: #16191F;
+}
+
+/* Secondary Header / Progress Bar Strip */
+.progress-strip {
+  background-color: var(--bg-surface);
+  border-bottom: 1px solid var(--border-color);
+  padding: 10px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.progress-info {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+.progress-badge {
+  background-color: var(--badge-bg);
+  color: var(--badge-text);
+  padding: 3px 10px;
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
+}
+
+.progress-bar-track {
+  width: 160px;
+  height: 8px;
+  background-color: var(--border-color-subtle);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background-color: var(--aws-orange);
+  width: 0%;
+  transition: width var(--transition-normal);
+}
+
+.score-counter {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+}
+
+.score-badge-correct {
+  color: var(--color-success);
+  background-color: var(--color-success-bg);
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+}
+
+.score-badge-wrong {
+  color: var(--color-danger);
+  background-color: var(--color-danger-bg);
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+}
+
+/* Exam Timer Display (Hidden in Study Mode) */
+.exam-timer-block {
+  display: none;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  color: var(--color-danger);
+  background-color: var(--color-danger-bg);
+  padding: 4px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-danger-border);
+}
+
+.exam-timer-block.visible {
+  display: flex;
+}
+
+/* Main Workspace Grid */
+.main-wrapper {
+  flex: 1;
+  display: flex;
+  max-width: 1440px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 24px;
+  gap: 24px;
+}
+
+.content-canvas {
+  flex: 1;
+  min-width: 0; /* Prevents flex blowout */
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Question Grid Navigator Sidebar (Drawer) */
+.nav-drawer {
+  width: var(--sidebar-width);
+  flex-shrink: 0;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  box-shadow: var(--card-shadow);
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - var(--header-height) - 100px);
+  position: sticky;
+  top: calc(var(--header-height) + 24px);
+}
+
+.nav-drawer-header {
+  padding: 16px;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-drawer-header h3 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.drawer-filter-group {
+  padding: 10px 14px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  background-color: var(--bg-surface-secondary);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.filter-chip {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  min-height: 28px;
+  transition: all var(--transition-fast);
+}
+
+.filter-chip.active {
+  background-color: var(--aws-orange);
+  color: #16191F;
+  border-color: var(--aws-orange-hover);
+}
+
+.grid-scroll-area {
+  flex: 1;
+  overflow-y: auto;
+  padding: 14px;
+}
+
+.question-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+}
+
+.q-grid-btn {
+  background-color: var(--bg-surface-secondary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  height: 40px;
+  min-height: 40px;
+  padding: 0;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  position: relative;
+  transition: all var(--transition-fast);
+}
+
+.q-grid-btn:hover {
+  background-color: var(--bg-surface-hover);
+  border-color: var(--text-muted);
+}
+
+.q-grid-btn.current {
+  border: 2px solid var(--aws-orange) !important;
+  box-shadow: 0 0 0 2px var(--aws-orange-soft);
+}
+
+.q-grid-btn.answered-correct {
+  background-color: var(--color-success);
+  color: #FFFFFF;
+  border-color: var(--color-success);
+}
+
+.q-grid-btn.answered-wrong {
+  background-color: var(--color-danger);
+  color: #FFFFFF;
+  border-color: var(--color-danger);
+}
+
+.q-grid-btn.answered-exam {
+  background-color: var(--color-info);
+  color: #FFFFFF;
+  border-color: var(--color-info);
+}
+
+.q-grid-btn.flagged::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--aws-orange);
+}
+
+/* Mobile Drawer Overlay */
+.drawer-backdrop {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--modal-backdrop);
+  z-index: 150;
+}
+
+/* Footer & Action Bar */
+.action-nav-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 0;
+  border-top: 1px solid var(--border-color);
+  margin-top: 8px;
+}
+
+.action-nav-left, .action-nav-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Mobile Responsiveness (R-03) */
+@media (max-width: 1024px) {
+  .nav-drawer {
+    position: fixed;
+    top: 0;
+    right: -340px;
+    height: 100vh;
+    z-index: 200;
+    transition: right var(--transition-normal);
+    box-shadow: -4px 0 24px rgba(0, 0, 0, 0.3);
+  }
+
+  .nav-drawer.open {
+    right: 0;
+  }
+
+  .drawer-backdrop.open {
+    display: block;
+  }
+
+  .aws-header-center {
+    display: none; /* Accessible via mobile settings dropdown */
+  }
+}
+
+@media (max-width: 640px) {
+  .aws-header {
+    padding: 0 14px;
+  }
+
+  .brand-subtitle {
+    display: none;
+  }
+
+  .main-wrapper {
+    padding: 14px;
+    gap: 14px;
+  }
+
+  .progress-strip {
+    padding: 8px 14px;
+  }
+
+  .progress-bar-track {
+    width: 100px;
+  }
+}

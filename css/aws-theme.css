@@ -1,0 +1,215 @@
+/* ==========================================================================
+   AWS Console & Skill Builder Theme System
+   Compliant with Antislop Rules (R-01, R-06, R-11, R-20, R-21, R-25, R-29)
+   ========================================================================== */
+
+:root {
+  /* Brand Tokens - AWS Official Colors */
+  --aws-squid-ink: #232F3E;
+  --aws-squid-ink-dark: #19222D;
+  --aws-squid-ink-light: #2C394B;
+  --aws-orange: #FF9900;
+  --aws-orange-hover: #EC7211;
+  --aws-orange-soft: rgba(255, 153, 0, 0.12);
+  
+  /* Feedback Tokens */
+  --color-success: #1D8102;
+  --color-success-bg: #EDF7ED;
+  --color-success-border: #A3D9A5;
+  --color-success-dark-bg: rgba(29, 129, 2, 0.2);
+  
+  --color-danger: #D13212;
+  --color-danger-bg: #FDF3F2;
+  --color-danger-border: #F5B5B0;
+  --color-danger-dark-bg: rgba(209, 50, 18, 0.2);
+  
+  --color-info: #0073BB;
+  --color-info-bg: #EBF5FA;
+  --color-info-border: #99C7E4;
+
+  --color-warning: #B7791F;
+  --color-warning-bg: #FEFCBF;
+
+  /* Typography */
+  --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "JetBrains Mono", Consolas, "Courier New", monospace;
+  
+  /* Layout Spacing */
+  --header-height: 64px;
+  --sidebar-width: 320px;
+  --max-content-width: 1040px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  
+  /* Transitions */
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.25s ease;
+}
+
+/* Light Theme (Default) */
+[data-theme="light"] {
+  --bg-app: #F2F4F8;
+  --bg-surface: #FFFFFF;
+  --bg-surface-secondary: #F8F9FB;
+  --bg-surface-hover: #F0F4F8;
+  --bg-nav: var(--aws-squid-ink);
+  --text-nav: #FFFFFF;
+  --text-nav-muted: #D5DBDB;
+  
+  --border-color: #D5DBDB;
+  --border-color-subtle: #E9ECEF;
+  --border-color-active: var(--aws-orange);
+  
+  --text-primary: #16191F;
+  --text-secondary: #545B64;
+  --text-muted: #7E868E;
+  
+  --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
+  --card-shadow-hover: 0 4px 8px rgba(0, 0, 0, 0.1);
+  --modal-backdrop: rgba(15, 27, 42, 0.6);
+  
+  --badge-bg: #EAEDED;
+  --badge-text: #363E48;
+}
+
+/* Dark Theme (AWS Dark Console Style) */
+[data-theme="dark"] {
+  --bg-app: #0F1B2A;
+  --bg-surface: #162335;
+  --bg-surface-secondary: #1B2B40;
+  --bg-surface-hover: #22344D;
+  --bg-nav: #0B131E;
+  --text-nav: #F2F3F3;
+  --text-nav-muted: #879596;
+  
+  --border-color: #2C3E55;
+  --border-color-subtle: #1F2D40;
+  --border-color-active: var(--aws-orange);
+  
+  --text-primary: #F2F3F3;
+  --text-secondary: #BAC5D1;
+  --text-muted: #7D8E9E;
+  
+  --card-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+  --card-shadow-hover: 0 6px 16px rgba(0, 0, 0, 0.45);
+  --modal-backdrop: rgba(5, 10, 18, 0.85);
+  
+  --badge-bg: #23354C;
+  --badge-text: #BAC5D1;
+
+  --color-success-bg: rgba(29, 129, 2, 0.18);
+  --color-success-border: #2E7D32;
+  
+  --color-danger-bg: rgba(209, 50, 18, 0.18);
+  --color-danger-border: #C62828;
+  
+  --color-info-bg: rgba(0, 115, 187, 0.18);
+  --color-info-border: #0288D1;
+}
+
+/* Base Reset & Accessibility */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--bg-app);
+  color: var(--text-primary);
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Visible Focus Indicator (R-32 Keyboard Accessibility) */
+:focus-visible {
+  outline: 2px solid var(--aws-orange);
+  outline-offset: 2px;
+}
+
+button:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--aws-orange);
+  outline-offset: 2px;
+}
+
+a {
+  color: var(--color-info);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Button Reset & Base Style */
+button {
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  padding: 8px 16px;
+  min-height: 44px; /* R-03 44px tap target */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: background-color var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast);
+}
+
+/* Primary Button (AWS Orange) */
+.btn-primary {
+  background-color: var(--aws-orange);
+  color: #16191F;
+  border-color: var(--aws-orange-hover);
+}
+
+.btn-primary:hover:not(:disabled) {
+  background-color: var(--aws-orange-hover);
+  color: #FFFFFF;
+}
+
+/* Secondary Button (Outline) */
+.btn-secondary {
+  background-color: var(--bg-surface);
+  color: var(--text-primary);
+  border-color: var(--border-color);
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background-color: var(--bg-surface-hover);
+  border-color: var(--text-muted);
+}
+
+/* Header Button (Light on Navy) */
+.btn-header {
+  background-color: transparent;
+  color: var(--text-nav);
+  border-color: var(--aws-squid-ink-light);
+  min-height: 38px;
+  padding: 6px 12px;
+}
+
+.btn-header:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: var(--text-nav-muted);
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
